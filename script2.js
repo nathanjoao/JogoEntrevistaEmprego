@@ -13,7 +13,24 @@ let currentQuestionIndex = 0;
 let score = 0;
 
 function loadQuestion(){
-    spnQtd.innerHTML = `${currentQuestionIndex + 1} / ${questions.length}`;
+    spnQt.innerHTML = `${currentQuestionIndex + 1} / ${questions.length}`;
     const item = questions[currentQuestionIndex];
-    an
+    optionsElement.innerHTML = "";
+    questionElement.innerHTML = item.questionElement;
+
+    item.optionsElement.forEach((answer) => {
+        const div = document.createElement("div");
+
+        div.innerHTML = `
+            <button class="answer" data-correct="${answer.correct}">
+                ${answer.option}
+        `;
+
+        optionsElement.appendChild(div);
+    });
+    document.querySelectorAll(".answer").forEach((item) => {
+        item.addEventListener("click", nextButton)
+    })
 }
+
+loadQuestion();
